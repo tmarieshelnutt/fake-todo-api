@@ -7,48 +7,49 @@ import { useState, useEffect } from "react";
 
 //create your first component
 const Todo = () => {
-    const [inputValue, setInputValue] = useState({});
     const [todos, setTodos] = useState([]);
+    const [inputValue, setInputValue] = useState({});
+    
     
     useEffect(()=> {
-        fetch('https://assets.breatheco.de/apis/fake/todos/user/tmarieshelnutt')
+        fetch('https://assets.breatheco.de/apis/fake/todos/user/tarashelnutt')
         .then((res) => {
-            return res.json()
+            return res.json();
         })
         .then((data) => {setTodos(data);
         
-    })
-},[])
+    });
+},[]);
 
 
     useEffect(() => {
-        fetch('https://assets.breatheco.de/apis/fake/todos/user/tmarieshelnutt',{
+        fetch('https://assets.breatheco.de/apis/fake/todos/user/tarashelnutt',{
             method:'PUT',
             body: JSON.stringify(todos),
-            headers:{"Content-type":"application/json"},
+            headers:{ "Content-type": "application/json" },
             
     })
         .then(res => {
             return res.json()
         })
-        .catch((error) => {
-            console.log(error)
-        })
+        .catch((err) => {
+            console.log(err)
+        });
     }, [todos]);
 
     const addTodo = () => {
         setTodos([...todos, inputValue])
-    }
+    };
 
     const inputChange = (e) => {
-        setInputValue({label:e.target.value,done:false})
-    }
+        setInputValue({label: e.target.value, done: false});
+    };
 
     const removeTodo = (index) => {
         setTodos((todo) => {
-            return todo.filter((item,i) => i !==index)
-        })
-    }
+            return todo.filter((item,i) => i !== index)
+        });
+    };
     return (
         <div className="container">
             <div>
